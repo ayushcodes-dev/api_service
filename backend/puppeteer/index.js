@@ -36,6 +36,7 @@ export async function getBrowser() {
         browser = await launch_browser();
         if (!browser) {
           contextPool = [];
+          failedLaunch++
         }
         launching = false;
       }
