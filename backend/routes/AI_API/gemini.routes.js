@@ -10,6 +10,9 @@ const router = express.Router();
  * @access private
  */
 router.post("/api/gemini/gen", geminiValidator, validate, async (req, res) => {
+    console.log(
+      "------------------------------------------------------------------------------------",
+    );
   const timeInSec = Math.floor(Date.now() / 1000);
   console.log("req has came", timeInSec);
   const { prompt } = req.body;

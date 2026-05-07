@@ -125,26 +125,20 @@ async function get_response(page) {
        delete list[list.length - 1];
      }
      const json = list.join("");
-     console.log(json);
      // Case 3: try direct parse
+     if(typeof json === "object") return json;
      try {
        return JSON.parse(json);
      } catch (err1) {
-       // Case 4: handle double stringified JSON
-       const onceParsed = JSON.parse(JSON.stringify(json));
-       return JSON.parse(onceParsed);
+     return null
      }
    } catch (err) {
-     return {
-       error: "Invalid JSON response",
-       raw: input,
-     };
+     return null
+     
    }
  }
 async function gemini(userInp) {
-  console.log(
-    "------------------------------------------------------------------",
-  );
+
   const context = await getContext();
   if (!context) return null;
   // creating new page or tab
@@ -174,14 +168,15 @@ async function gemini(userInp) {
     //const data = JSON.parse(cleanRes);
   
     const data = JsonParser(res.data);
-  console.log(data);
+    console.log(res.data,data, typeof data)
+  console.log(data ? data.userdata : res.data);
     // closin context
     await page.close();
     return response(
       true,
       null,
       "successfuly got data from gemini",
-      data ? data.userdata : data,
+      data ? data.userdata : res.data,
     );
   } else {
     // closin context
