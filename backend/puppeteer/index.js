@@ -9,7 +9,12 @@ async function launch_browser() {
     const browser = await puppeteer.launch({
       /*executablePath:
         "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe",*/
-     // headless: false,
+      // headless: false,
+      args: [
+        "--no-sandbox",
+        "--disable-setuid-sandbox",
+        "--disable-dev-shm-usage",
+      ],
     });
     
     console.log("Launching new browser...");
