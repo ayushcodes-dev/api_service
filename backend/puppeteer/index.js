@@ -26,6 +26,8 @@ async function launch_browser() {
 
 // get browser
 export async function getBrowser() {
+  try{
+
   if (browser && browser.isConnected()) {
     return browser;
   }
@@ -44,4 +46,8 @@ export async function getBrowser() {
     contextPool = [];
   });
   return browser;
+}catch(error){
+  console.error("Error in getBrowser:", error);
+  return null;
+}
 }
