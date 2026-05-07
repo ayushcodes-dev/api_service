@@ -13,7 +13,9 @@ async function getContext() {
   }
   // getting browser
   const browser = await getBrowser();
-  if (!browser) return null;
+  if (!browser){ return null;
+    console.error("Failed to get browser");
+  }
   //  creating a new context window
   const newContext = await browser.createBrowserContext();
   // Generate a new context id

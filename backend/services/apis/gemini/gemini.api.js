@@ -140,7 +140,7 @@ async function get_response(page) {
 async function gemini(userInp) {
 
   const context = await getContext();
-  if (!context) return null;
+  if (!context) return response(false, null, "failed to get context");
   // creating new page or tab
   const page = await context.newPage();
   // Navigate the page to a URL.
